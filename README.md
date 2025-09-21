@@ -27,17 +27,29 @@ This app is built with user control and convenience in mind, offering a range of
 #### Prerequisites
 
   * **Python 3.10.0** or a higher version.
+  * **Git** (for cloning the repository)
 
 #### Installation
 
 Follow these simple steps to get the application up and running:
 
-1.  **Install Python 3.10.0** or a more recent version if you don't have it already.
-2.  **Create a virtual environment** to keep project dependencies isolated:
+1. **Create a folder for your project** (You can use any name you want. You can skip this step, it is not necessary):
+   ```bash
+   mkdir your-folder_name
+   cd your-folder_name
+
+2. **Clone the source code from the GitHub repository**:
+    ```bash
+    git clone https://github.com/babak8564/DataManager.git
+    cd DataManager
+    ```
+
+3.  **Install Python 3.10.0** or a more recent version if you don't have it already.
+4.  **Create a virtual environment** to keep project dependencies isolated:
     ```bash
     python -m venv myvenv
     ```
-3.  **Activate the virtual environment**:
+5.  **Activate the virtual environment**:
       * On **Linux/macOS**:
         ```bash
         source venv/bin/activate
@@ -46,7 +58,7 @@ Follow these simple steps to get the application up and running:
         ```bash
         venv\Scripts\activate
         ```
-4.  **Install the required dependencies** from the `requirements.txt` file:
+6.  **Install the required dependencies** from the `requirements.txt` file:
     ```bash
     pip install -r requirements.txt
     ```
@@ -54,8 +66,7 @@ Follow these simple steps to get the application up and running:
 #### Usage
 
 Once the dependencies are installed, you can start the application by running:
-
-```bash
-python app.py
-```
+  ```bash
+  python app.py
+  ```
 

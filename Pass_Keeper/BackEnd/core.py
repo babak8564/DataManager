@@ -28,6 +28,8 @@ class App:
     def __init__(self, root, main_path):
         self.root:Window = root
         self.main_dir: str = os.path.dirname(os.path.abspath(main_path))
+        if not os.path.isdir(os.path.join(self.main_dir, "Data")):
+            os.mkdir(os.path.join(self.main_dir, "Data"))
         
         self.settings: AppSettings = AppSettings(self.main_dir)
         self.icons_path: str = os.path.join(self.main_dir, 'Icons')

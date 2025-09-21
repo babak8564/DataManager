@@ -58,7 +58,8 @@ class PopUp(tk.Toplevel):
         self.after(delay, lambda:self.info_label.config(style=old_style))
     
     def on_close(self, ev):
-        if (0<ev.x<20) and (0<ev.y<20):
+        y_max, x_max = ev.widget.winfo_reqheight(), ev.widget.winfo_reqwidth()
+        if (0<ev.x<x_max) and (0<ev.y<y_max):
             self.destroy()
 
 class SettingsPopup(PopUp):
@@ -303,7 +304,7 @@ class AddNewPopup(PopUp):
         data_id, msg = self.app.insert_database_row(e1.result(), e2.result(), e3.result(), td.result())
         result = self.app.view.table_insert_data(data_id, e1.result())
         if result:
-            self.main_notification(self.app.main_notif, msg, SUCCESS_TL, 3000)
+            self.main_notification(msg, SUCCESS_TL, 3000)
             self.destroy()
         else:
             self.info_label.config(style=DANGER_TL)

@@ -35,7 +35,7 @@ Follow these simple steps to get the application up and running:
 1.  **Install Python 3.10.0** or a more recent version if you don't have it already.
 2.  **Create a virtual environment** to keep project dependencies isolated:
     ```bash
-    python3.10.0 -m venv venv
+    python -m venv myvenv
     ```
 3.  **Activate the virtual environment**:
       * On **Linux/macOS**:

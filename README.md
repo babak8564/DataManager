@@ -1,9 +1,13 @@
-# Git Commands
- 
-- Clone -> Bring a repository that is hosted somewhere like Github into a folder on your local machine
-- add -> Track your files and changes in Git
-- commit -> Save your files in Git
-- push -> Upload Git commits to a remote repo, like Github
-- pull -> Download changes from remote repo to your local machine, the opposite of push
+# Securing all usernames and passwoeds with single app
+
+## Requirements
+- Python 3.12
+
+## Setup
+1. Install Python 3.12.
+2. Create a virtual environment: `python3.12 -m venv venv`
+3. Activate it: `source venv/bin/activate` (Linux/macOS) or `venv\Scripts\activate` (Windows)
+4. Install dependencies: `pip install -r requirements.txt`
+5. Run: `python app.py`
 
 

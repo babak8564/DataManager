@@ -56,5 +56,3 @@ except RuntimeError as e:
     app.set_state(AppState.DATABASE_ERROR)
 
 root.mainloop()
-
-

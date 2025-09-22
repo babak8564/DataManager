@@ -390,4 +390,3 @@ def timing(func):
         print(f"nano: {t}, micro: {t/1000}, milli: {t/1e6}, second: {t/1e9}")
         return r
     return wrap
-

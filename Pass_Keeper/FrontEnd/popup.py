@@ -57,9 +57,12 @@ class PopUp(tk.Toplevel):
         self.after(delay, self.title_info.set, old_title)
         self.after(delay, lambda:self.info_label.config(style=old_style))
     
-    def on_close(self, ev):
-        y_max, x_max = ev.widget.winfo_reqheight(), ev.widget.winfo_reqwidth()
-        if (0<ev.x<x_max) and (0<ev.y<y_max):
+    def on_close(self, ev=None):
+        if ev:
+            y_max, x_max = ev.widget.winfo_reqheight(), ev.widget.winfo_reqwidth()
+            if (0<ev.x<x_max) and (0<ev.y<y_max):
+                self.destroy()
+        else:
             self.destroy()
 
 class SettingsPopup(PopUp):
@@ -277,7 +280,7 @@ class AddNewPopup(PopUp):
         
         add_btn = tk.Button(bFrame1, text='Add New Info', command=lambda:self.add_new_data(e1,e2,e3,td), style=POPUP.CONTENT_TBUTTON)
         add_btn.pack(side='left', padx=5, pady=2)
-        cancle_btn = tk.Button(bFrame1, text='Cancle', style='outline.TButton', command=self.close)
+        cancle_btn = tk.Button(bFrame1, text='Cancle', style='outline.TButton', command=self.on_close)
         cancle_btn.pack(side='left', padx=5, pady=2)
     
     def add_new_data(self,e1,e2,e3,td):
@@ -350,7 +353,7 @@ class ShowRowPopUp(PopUp):
         self.td.delete('1.0', '1.end')
         self.td.insert('1.0', self.values[3])
         
-        cancle_btn = tk.Button(self.bFrame1, text='Close', style='outline.TButton', command=self.close)
+        cancle_btn = tk.Button(self.bFrame1, text='Close', style='outline.TButton', command=self.on_close)
         cancle_btn.pack(side='left', padx=5)
 
 
@@ -377,7 +380,7 @@ class EditRowPopUp(ShowRowPopUp):
                 if result:
                     info_style = SUCCESS_TL
                     self.app.view.tree.item(self.selected_item, values=[self.data_id, values[0], "****", "****", "****"])
-                    self.after(3000, self.close)
+                    self.after(3000, self.on_close)
                 else:
                     info_style = DANGER_TL
                 self.title_info.set(msg)

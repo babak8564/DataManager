@@ -67,6 +67,7 @@ Follow these simple steps to get the application up and running:
 
 Once the dependencies are installed, you can start the application by running:
   ```bash
+  cd Pass_Keeper
   python app.py
   ```
 

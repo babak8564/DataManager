@@ -73,7 +73,6 @@ class SettingsPopup(PopUp):
         super().__init__(app, width, height, title, iconphoto, size, position, minsize, maxsize, resizable, transient, overrideredirect, windowtype, topmost, toolwindow, alpha, **kwargs)
         
     def setup_ui(self):
-        # Popup Frame (with border to replace window decorations)
         top_frame = tk.Frame(self.main_fram, style=POPUP.CONTENT_TFRAME)
         top_frame.pack(fill='both', expand=1,padx=1, pady=1)
         bottom_frame = tk.Frame(self.main_fram, style=POPUP.SIDEBAR_TFRAME)
@@ -102,13 +101,6 @@ class SettingsPopup(PopUp):
         self.save_btn.pack(side='bottom', fill='x', anchor='s',padx=3, pady=5)
 
         self.show_timer_settings()
-    
-    def close(self):
-        # close popup and back to main window
-        # style = self.app_notif.cget('style')
-        # self.app_notif.config(text='You close settings window.', style=INFO_TL)
-        # self.app_notif.after(3000, lambda:self.app_notif.config(text='', style=style))
-        self.destroy()
 
     def clear_settings_frame(self):
         for widget in self.content_frame.winfo_children()[1:]:
@@ -154,7 +146,6 @@ class SettingsPopup(PopUp):
     def database_copying(self, task):
         try:
             next(task)
-            # print("Step result: ", result)
             self.app.root.after(1000, self.database_copying, task)
         except StopIteration:
             try:
@@ -166,7 +157,6 @@ class SettingsPopup(PopUp):
     def after_database_copy(self, task):
         try:
             next(task)
-            # print("task result: ", result)
             self.app.root.after(1000, self.after_database_copy, task)
         except StopIteration:
             try:
@@ -259,13 +249,8 @@ class SettingsPopup(PopUp):
 class AddNewPopup(PopUp):
      
     def setup_ui(self):
-        # lframe = tk.Frame(self.main_fram, style=POPUP.CONTENT_TFRAME)
-        # lframe.pack(fill='both')
         entry_frame = tk.Frame(self.main_fram, style=POPUP.CONTENT_TFRAME)
         entry_frame.pack(padx=5, pady=5, fill='both', expand=1)
-
-        # l = tk.Label(lframe, text=self.info_msg, anchor='center', style=INFO_TL)
-        # l.pack(fill='x')
 
         eFrame1 = tk.Frame(entry_frame, style=POPUP.CONTENT_TFRAME)
         eFrame1.pack(padx=5,pady=(0,1))
@@ -294,11 +279,6 @@ class AddNewPopup(PopUp):
         add_btn.pack(side='left', padx=5, pady=2)
         cancle_btn = tk.Button(bFrame1, text='Cancle', style='outline.TButton', command=self.close)
         cancle_btn.pack(side='left', padx=5, pady=2)
-    
-    def close(self):
-        # msg = 'You have stopped adding new information.'
-        # self.main_notification(self.app_notif, msg, DANGER_TL)
-        self.destroy()
     
     def add_new_data(self,e1,e2,e3,td):
         data_id, msg = self.app.insert_database_row(e1.result(), e2.result(), e3.result(), td.result())
@@ -333,14 +313,10 @@ class ShowRowPopUp(PopUp):
                 self.title_info.set(msg)
         else:
             self.title_info.set("No Item selected from table. Close popup and selecte one row.")
-        # lframe = tk.Frame(self.main_fram, style=POPUP.CONTENT_TFRAME)
-        # lframe.pack(fill='both')
+        
         self.info_label.config(style=info_style)
         entry_frame = tk.Frame(self.main_fram, style=POPUP.CONTENT_TFRAME)
         entry_frame.pack(padx=5, pady=5, fill='both', expand=1)
-
-        # self.label = tk.Label(lframe, text=self.info_msg, anchor='center', style=self.info_style)
-        # self.label.pack(fill='x')
 
         eFrame1 = tk.Frame(entry_frame, style=POPUP.CONTENT_TFRAME)
         eFrame1.pack(padx=5,pady=(0,5))
@@ -376,9 +352,6 @@ class ShowRowPopUp(PopUp):
         
         cancle_btn = tk.Button(self.bFrame1, text='Close', style='outline.TButton', command=self.close)
         cancle_btn.pack(side='left', padx=5)
-    
-    def close(self):
-        self.destroy()
 
 
 class EditRowPopUp(ShowRowPopUp):
@@ -422,7 +395,6 @@ class ImportDataPopUp(PopUp):
         self.delta = None
         self.values = None
         self.progress_lenght = 0
-        # self.tree_height = len(app.view.tree.get_children())
         self.n_success = 0
         self.n_failed = 0
         self.n_duplicate = 0
@@ -441,7 +413,6 @@ class ImportDataPopUp(PopUp):
         csv_info = "🔷 Choose number of columns (2, 3, 4)\n\n🔷 click on 📜 CSV button"
         csv_info_label = tk.Label(csv_frame, text=csv_info, font=("Arial", 10), style=POPUP.SIDEBAR_TLABEL)
         csv_info_label.pack(fill='x', pady=(15,3))
-        # tk.Button(csv_frame, text="Choose csv file", command=lambda:self.choose_file([("CSV file","*.csv")])).pack(fill='x')
         self.n_cols = tk.Combobox(csv_frame, values=[2,3,4], state='readonly', style=POPUP.CUSTOM_TCOMBOBOX)
         self.n_cols.pack(fill='x', pady=(10,3))
         self.csv_btn = tk.Button(csv_frame, text="📜 CSV", command=self.read_csv, style=POPUP.CUSTOM_TBUTTON)
@@ -568,7 +539,7 @@ class ExportDataPopUp(PopUp):
         self.value = None
         self.directory = None
         self.for_all = tk.BooleanVar()
-        self.with_encryption = tk.BooleanVar()
+        self.encryption_state = tk.BooleanVar()
         self.item_selected = ()
         self.length = 0
         super().__init__(app, width, height, title, iconphoto, size, position, minsize, maxsize, resizable, transient, overrideredirect, windowtype, topmost, toolwindow, alpha, **kwargs)
@@ -605,17 +576,16 @@ class ExportDataPopUp(PopUp):
 
         
         with_encrypt = tk.Radiobutton(
-            method_frame, text="With Enryption", variable=self.with_encryption, 
+            method_frame, text="With Enryption", variable=self.encryption_state, 
             value=True, style=POPUP.CONTENT_TRADIOBTN
         )
         with_encrypt.pack(anchor='w', fill='x', pady=5)
         no_encrypt = tk.Radiobutton(
-            method_frame, text="No  Encryption", variable=self.with_encryption, 
+            method_frame, text="No  Encryption", variable=self.encryption_state, 
             value=False, style=POPUP.CONTENT_TRADIOBTN
         )
         no_encrypt.pack(anchor='w', fill='x', pady=5)
 
-        
         # eframe
         e = Entry(exleft_frame, "Enter file name")
         e.pack(padx=2, fill=tk.X)
@@ -671,7 +641,7 @@ class ExportDataPopUp(PopUp):
                 self.delta = 100/self.length
                 self.progress['value'] = 0
                 self.value = self.app.export_to_txt(
-                    file_path, self.get_data_ids, self.with_encryption.get()
+                    file_path, self.get_data_ids, self.encryption_state.get()
                 )
                 self.start_exporting()
                 self.disable()
@@ -691,7 +661,7 @@ class ExportDataPopUp(PopUp):
                 self.delta = 100/self.length
                 self.progress['value'] = 0
                 self.value = self.app.export_to_csv(
-                    file_path, self.get_data_ids, self.with_encryption.get()
+                    file_path, self.get_data_ids, self.encryption_state.get()
                 )
                 self.start_exporting()
                 self.disable()

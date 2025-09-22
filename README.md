@@ -45,6 +45,8 @@ Follow these simple steps to get the application up and running:
     ```
 
 3.  **Install Python 3.10.0** or a more recent version if you don't have it already.
+    If you don't know how to install specific version of python just ask AI.
+
 4.  **Create a virtual environment** to keep project dependencies isolated:
     ```bash
     python -m venv myvenv

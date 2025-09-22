@@ -1,11 +1,8 @@
 import base64
-import pickle
 from cryptography.fernet import Fernet
 from cryptography.hazmat.primitives import hashes
 from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
 from argon2 import PasswordHasher
-import hashlib
-
 
 class Encryption:
     @staticmethod
@@ -45,4 +42,3 @@ class Encryption:
             return ph.verify(hash=hash, password=password)
         except:
             return False
-

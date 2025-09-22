@@ -20,8 +20,6 @@ class CustomTreeview(tk.Treeview):
     def enable_context_menu(self, show_context_menu, *arg):
         self.bind("<Button-3>", lambda e: show_context_menu(e, *arg))
         self.context_menu = Menu(self, tearoff=0)
-        # if not hasattr(self, "options"):
-        #     self.options = []
     
     def sort_column(self, col):
         # Get all items
@@ -193,6 +191,7 @@ class CustomEntry(tk.Frame):
 
 
 class ToolTip:
+    
     def __init__(self, bg='red', fg='silver', font=('Arial', 9)):
         self.__tooltip = None
         self.bg = bg
@@ -335,6 +334,7 @@ class PasswordEntry(CustomEntry):
 
 
 class CountDown(tk.Canvas):
+    
     def __init__(self, master, size, total_time=60000, **kwg):
         """total_time and dt(interval) are in milisecond"""
         super().__init__(master, width=size+1, height=size+1, **kwg)
@@ -404,7 +404,6 @@ class Entry(tk.Entry):
             return ''
         return text
         
-    
     def focusIn(self, event=None):
         text = self.get()
         if text == self.initText:
@@ -425,6 +424,7 @@ class Entry(tk.Entry):
                 self.delete(0, 'end')
                 self.config(foreground=self.fg)
                 self.insert(0, text)
+    
     def setstr(self, index: str | int, string: str) -> None:
         self.config(foreground=self.fg)
         self.insert(index, string)

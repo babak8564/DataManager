@@ -43,6 +43,7 @@ class TasksResumable:
                 r = task()
                 f.seek(0)
                 f.write(f"{t_name}:completed")
+                f.flush()
                 yield t_name, r
                 f.seek(0)
                 f.truncate()
@@ -90,7 +91,7 @@ class AppSettings:
         self.app_dir = dir
 
     @property
-    def data_directory(self):
+    def data_directory00(self):
         return os.path.join(self.app_dir, 'Data')
 
     def settings_path(self):
@@ -153,6 +154,7 @@ class AppSettings:
 
 
 class AppVariable:
+    
     def __init__(self, value=None):
         self.__v = value
     
@@ -164,6 +166,7 @@ class AppVariable:
 
 
 class Clipboard:
+    
     def __init__(self):
         self.has_copy = False
         self.init_time = None
@@ -176,41 +179,6 @@ class Clipboard:
     def set_copy(self, value:str):
         ppc.copy(value)
         self.has_copy = True
-
-
-def count_lines_system_windows(filename):
-    try:
-        # Use findstr to count lines (Windows equivalent)
-        result = subprocess.run(
-            ['findstr', '/R', '/C:"^.*$"', filename],
-            capture_output=True, text=True, check=True
-        )
-        line_count = len(result.stdout.splitlines())
-        return line_count
-    except subprocess.CalledProcessError as e:
-        print(f"Error executing findstr: {e}")
-        return None
-    except FileNotFoundError:
-        print(f"File not found: {filename}")
-        return None
-
-def count_lines_system(filename):
-    result = subprocess.run(['wc', '-l', filename], capture_output=True, text=True)
-    return int(result.stdout.split()[0])
-
-def count_lines(filename):
-    max_buf_size = 1024 * 1024 * 16  # 1MB/16MB chunks
-    file_size = os.path.getsize(filename)
-    buf_size = min(file_size, max_buf_size)  # Use file size or max_buf_size, whichever is smaller
-    with open(filename, 'rb') as file:  # Open in binary mode for speed
-        newline = b'\n'
-        lines = 0
-        while True:
-            chunk = file.read(buf_size)
-            if not chunk:
-                break
-            lines += chunk.count(newline)
-    return lines
 
 def step_copying(src, dst, chunk_size=20480):
     x = 0
@@ -366,7 +334,7 @@ def gexport_to_csv(file_path:str, replacement:str, data_var:AppVariable):
             yield i, nc
             nc = 0
 
-def import_text_data(file_path:str, line_sep:str, n_cols:int=4):
+def import_text_data00(file_path:str, line_sep:str, n_cols:int=4):
     """line_sep is needed to extract data. It seperate data in 2 fields: site, extra info"""
     lines = []
     if os.path.isfile(file_path):
@@ -391,7 +359,7 @@ def import_text_data(file_path:str, line_sep:str, n_cols:int=4):
             i += 1
     return data
 
-def import_csv_data(file_path:str, n_columns:int, replacement:str):
+def import_csv_data00(file_path:str, n_columns:int, replacement:str):
     """The number of columns in the csv file(file_path) should be given by n_columns."""
     data = []
     lines = []

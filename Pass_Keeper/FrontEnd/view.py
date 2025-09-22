@@ -15,6 +15,7 @@ tlp = ToolTip()
 # The app has three view: ManagerFrame, SetAccountFrame and LoginFrame view that inherit from ViewFrame
 
 class ViewFrame(tk.Frame):
+    
     def __init__(self, app:'App', master = None, *args, **kwrgs):
         super().__init__(master, *args, **kwrgs)
         self.config(style=MAIN.CONTENT_TFRAME)
@@ -63,8 +64,7 @@ class ManagerFrame(ViewFrame):
         self.load_ui()
         app.root.bind("<Button>", self.__reset_root_timer)
         app.root.bind("<Key>", self.__reset_root_timer)
-        
-    
+         
     def __reset_root_timer(self, event):
         self.initial_time = time.time()
         self.timer = self.settings['timer']['inactivity']
@@ -84,7 +84,6 @@ class ManagerFrame(ViewFrame):
         if time.time() - self.initial_time > self.timer:
             self.logout()
             return
-        
         self.app.root.after(1000, self.inactivity_ckeck)
 
     def load_ui(self):
@@ -153,8 +152,6 @@ class ManagerFrame(ViewFrame):
         self.search_label_r.pack(side=tk.LEFT, pady=(0,5), fill='x')
         self.load_data()
         self.animate_sidebar()
-
-        # self.app.root.bind("<<KeyGenerated>>", lambda e: self.animate_sidebar())
     
     def animate_sidebar(self):
         """Pack the sidebar buttons with simple animation"""
@@ -419,7 +416,6 @@ class SetAccountFrame(ViewFrame):
         msg += '\nconfirm password is empty' if not confirm_password else ''
         if "empty" in msg:
             messagebox.showerror("Error", msg)
-            # self.app.main_notif.config(text=msg, style=WARNING_TL)
             return
         if password != confirm_password:
             messagebox.showerror("Error", "password dose not match!")
@@ -427,7 +423,6 @@ class SetAccountFrame(ViewFrame):
         salt , msg = self.app.create_account(username, password)
         if salt:
             
-            # self.p2.entry.unbind("<KeyPress-Return>")
             self.app.root.unbind("<Return>")
             self.confirmButton.configure(state=tk.DISABLED)
             self.confirm_label.config(text="Please wait to generate your key...", style=SUCCESS_TL)
@@ -504,7 +499,6 @@ class LoginFrame(ViewFrame):
         salt, msg = self.app.login(username, password)
         if salt:
             self.app.root.unbind("<Return>", self.fid)
-            # self.app.root.after(100, self.app.key_maker, password.encode(), salt)
             self.login_btn.config(state=tk.DISABLED)
             self.login_label.config(text="Please wait to generate your key...", style=SUCCESS_TL)
             self.app.root.after(10, self.app.key_maker, password.encode(), salt)

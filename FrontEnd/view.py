@@ -521,7 +521,8 @@ class DatabaseErrorFrame(ViewFrame):
         info_frame = tk.Frame(self, style=MAIN.CUSTOM_TFRAME)
         info_frame.pack()
         if "RuntimeError" in self.app.db_error:
-            info = f"{'\n'.join(self.app.db_error)}\nReplace with a backup or delete the file"
+            error_msg = '\n'.join(self.app.db_error)
+            info = f"{error_msg}\nReplace with a backup or delete the file"
             fg = app.style.DANGER
             justify='center'
             l = tk.Label(

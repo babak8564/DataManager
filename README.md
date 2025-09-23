@@ -49,16 +49,18 @@ Follow these simple steps to get the application up and running:
 
 4.  **Create a virtual environment** to keep project dependencies isolated:
     ```bash
-    python -m venv myvenv
+    python -m venv virtual_e
     ```
+    *you can replace virtual_e with your desire name.
+
 5.  **Activate the virtual environment**:
       * On **Linux/macOS**:
         ```bash
-        source venv/bin/activate
+        source virtual_e/bin/activate
         ```
       * On **Windows**:
         ```bash
-        venv\Scripts\activate
+        virtual_e\Scripts\activate
         ```
 6.  **Install the required dependencies** from the `requirements.txt` file:
     ```bash

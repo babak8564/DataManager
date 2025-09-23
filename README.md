@@ -40,8 +40,8 @@ Follow these simple steps to get the application up and running:
 
 2. **Clone the source code from the GitHub repository**:
     ```bash
-    git clone https://github.com/babak8564/DataManager.git
-    cd DataManager
+    git clone https://github.com/babak8564/Pass_Keeper.git
+    cd Pass_Keeper
     ```
 
 3.  **Install Python 3.10.0** or a more recent version if you don't have it already.

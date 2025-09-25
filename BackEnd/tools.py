@@ -129,7 +129,7 @@ class AppSettings:
                     "path": os.path.join(self.app_dir, 'Data')
                 },
                 "icons":{
-                    "app_ico":os.path.join(self.app_dir, 'Icons', 'PassKeeper.ico'),
+                    "app_icon":os.path.join(self.app_dir, 'Icons', 'PassKeeper.png'),
                     "SetAccountFrame":{
                         "add_user_icon":os.path.join(self.app_dir, 'Icons', "add_user.png"),
                         "entry_username":os.path.join(self.app_dir, 'Icons', "user_name.png"),

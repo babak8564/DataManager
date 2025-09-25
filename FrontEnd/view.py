@@ -309,21 +309,27 @@ class ManagerFrame(ViewFrame):
 
     def load_csv(self):
         self.notif_label.config(text='', style=MAIN.CUSTOM_TLABEL)
-        ImportDataPopUp(self.app, 550, 250, 'select which type of file you want to extract data from.')
+        width = int(self.app.root.winfo_screenwidth()*0.41)
+        height = int(self.app.root.winfo_screenheight()*0.33)
+        ImportDataPopUp(self.app, width, height, 'select which type of file you want to extract data from.')
 
     def save_csv(self):
         self.notif_label.config(text='', style=MAIN.CUSTOM_TLABEL)
-        ExportDataPopUp(self.app, 350, 200, "Export Data to CSV or TXT format")
+        width = int(self.app.root.winfo_screenwidth()*0.26)
+        height = int(self.app.root.winfo_screenheight()*0.26)
+        ExportDataPopUp(self.app, width, height, "Export Data to CSV or TXT format")
 
     def show_settings(self):
         self.notif_label.config(text='', style=MAIN.CUSTOM_TLABEL)
-        popup_width = 600
-        popup_height = 300
-        SettingsPopup(self.app, popup_width, popup_height, "Settings")
+        width = int(self.app.root.winfo_screenwidth()*0.44)
+        height = int(self.app.root.winfo_screenheight()*0.4)
+        SettingsPopup(self.app, width, height, "Settings")
     
     def add_new_row(self):
         self.notif_label.config(text='', style=MAIN.CUSTOM_TLABEL)
-        AddNewPopup(self.app, 500, 200, " Add New Info to database ")
+        width = int(self.app.root.winfo_screenwidth()*0.37)
+        height = int(self.app.root.winfo_screenheight()*0.26)
+        AddNewPopup(self.app, width, height, " Add New Info to database ")
     
     def logout(self):
         for window in self.app.root.winfo_children(): 

@@ -15,9 +15,13 @@ root = tk.Window()
 app = App(root, __file__)
 
 root.title("Password Manager")
-root.geometry("900x500+50+50")
+width = int(root.winfo_screenwidth()*0.66)
+height = int(root.winfo_screenheight()*0.66)
+root.geometry(f"{width}x{height}+50+50")
 root.protocol("WM_DELETE_WINDOW", app.on_closing)
-root.iconbitmap(app.settings.new_settings['icons']['app_ico'])
+# app Icon
+icon = tk.PhotoImage(file=app.settings.new_settings['icons']['app_icon'])
+root.iconphoto(True, icon)
 
 app.style = CryptoStyle(root, app.style_variant, app.style_type, app.style_color)
 

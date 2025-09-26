@@ -20,8 +20,9 @@ height = int(root.winfo_screenheight()*0.66)
 root.geometry(f"{width}x{height}+50+50")
 root.protocol("WM_DELETE_WINDOW", app.on_closing)
 # app Icon
-icon = tk.PhotoImage(file=app.settings.new_settings['icons']['app_icon'])
-root.iconphoto(True, icon)
+app_icon = tk.PhotoImage(file=app.settings.new_settings['icons']['app_icon'])
+root.iconphoto(False, app_icon)
+
 
 app.style = CryptoStyle(root, app.style_variant, app.style_type, app.style_color)
 

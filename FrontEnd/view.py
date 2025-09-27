@@ -223,7 +223,9 @@ class ManagerFrame(ViewFrame):
     
     def table_edit_item(self):
         self.notif_label.config(text='', style=MAIN.CUSTOM_TLABEL)
-        EditRowPopUp(self.app, 500, 200, "Edit seleted row and update Database.")
+        width = int(self.app.root.winfo_screenwidth()*0.37)
+        height = int(self.app.root.winfo_screenheight()*0.26)
+        EditRowPopUp(self.app, width, height, "Edit seleted row and update Database.")
     
     def table_remove_item(self):
         items = self.tree.selection()
@@ -277,7 +279,9 @@ class ManagerFrame(ViewFrame):
     
     def table_show_item(self):
         self.notif_label.config(text='', style=MAIN.CUSTOM_TLABEL)
-        ShowRowPopUp(self.app, 500, 200, 'Show info for selected row.')
+        width = int(self.app.root.winfo_screenwidth()*0.37)
+        height = int(self.app.root.winfo_screenheight()*0.26)
+        ShowRowPopUp(self.app, width, height, 'Show info for selected row.')
         
     def table_insert_data(self, data_id, site:str):
         if data_id:

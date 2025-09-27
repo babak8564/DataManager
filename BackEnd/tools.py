@@ -91,7 +91,7 @@ class AppSettings:
         self.app_dir = dir
 
     @property
-    def data_directory00(self):
+    def data_directory(self):
         return os.path.join(self.app_dir, 'Data')
 
     def settings_path(self):

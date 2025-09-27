@@ -5,7 +5,7 @@ from tkinter import messagebox
 from PIL import Image, ImageTk
 from FrontEnd.customwidget import CustomTreeview, CustomEntry, PasswordEntry, ToolTip, CountDown
 from FrontEnd.styles import MAIN, SUCCESS_TL, INFO_TL, WARNING_TL, DANGER_TL
-from FrontEnd.popup import SettingsPopup, AddNewPopup, ShowRowPopUp, EditRowPopUp, ImportDataPopUp, ExportDataPopUp
+from FrontEnd.popup import SettingsPopup, AddNewPopup, ShowRowPopup, EditRowPopup, ImportDataPopup, ExportDataPopup
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
@@ -225,7 +225,7 @@ class ManagerFrame(ViewFrame):
         self.notif_label.config(text='', style=MAIN.CUSTOM_TLABEL)
         width = int(self.app.root.winfo_screenwidth()*0.37)
         height = int(self.app.root.winfo_screenheight()*0.26)
-        EditRowPopUp(self.app, width, height, "Edit seleted row and update Database.")
+        EditRowPopup(self.app, width, height, "Edit seleted row and update Database.")
     
     def table_remove_item(self):
         items = self.tree.selection()
@@ -281,7 +281,7 @@ class ManagerFrame(ViewFrame):
         self.notif_label.config(text='', style=MAIN.CUSTOM_TLABEL)
         width = int(self.app.root.winfo_screenwidth()*0.37)
         height = int(self.app.root.winfo_screenheight()*0.26)
-        ShowRowPopUp(self.app, width, height, 'Show info for selected row.')
+        ShowRowPopup(self.app, width, height, 'Show info for selected row.')
         
     def table_insert_data(self, data_id, site:str):
         if data_id:
@@ -315,13 +315,13 @@ class ManagerFrame(ViewFrame):
         self.notif_label.config(text='', style=MAIN.CUSTOM_TLABEL)
         width = int(self.app.root.winfo_screenwidth()*0.41)
         height = int(self.app.root.winfo_screenheight()*0.33)
-        ImportDataPopUp(self.app, width, height, 'select which type of file you want to extract data from.')
+        ImportDataPopup(self.app, width, height, 'select which type of file you want to extract data from.')
 
     def save_csv(self):
         self.notif_label.config(text='', style=MAIN.CUSTOM_TLABEL)
         width = int(self.app.root.winfo_screenwidth()*0.26)
         height = int(self.app.root.winfo_screenheight()*0.26)
-        ExportDataPopUp(self.app, width, height, "Export Data to CSV or TXT format")
+        ExportDataPopup(self.app, width, height, "Export Data to CSV or TXT format")
 
     def show_settings(self):
         self.notif_label.config(text='', style=MAIN.CUSTOM_TLABEL)

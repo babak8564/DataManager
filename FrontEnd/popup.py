@@ -3,7 +3,7 @@ from FrontEnd.customwidget import *
 from FrontEnd.styles import POPUP,SUCCESS_TL, DANGER_TL, INFO_TL, WARNING_TL
 from BackEnd.core import App
 
-class PopUp(tk.Toplevel):
+class Popup(tk.Toplevel):
 
     def __init__(self, app:App, width:int, height:int, title:str='', iconphoto='', size=None, position=None, minsize=None, maxsize=None, resizable=None, transient=None, overrideredirect=True, windowtype=None, topmost=False, toolwindow=False, alpha=1, **kwargs):
         super().__init__(title, iconphoto, size, position, minsize, maxsize, resizable, transient, overrideredirect, windowtype, topmost, toolwindow, alpha, **kwargs)
@@ -75,7 +75,7 @@ class PopUp(tk.Toplevel):
         else:
             self.destroy()
 
-class SettingsPopup(PopUp):
+class SettingsPopup(Popup):
     
     def __init__(self, app, width, height, title = '', iconphoto='', size=None, position=None, minsize=None, maxsize=None, resizable=None, transient=None, overrideredirect=True, windowtype=None, topmost=False, toolwindow=False, alpha=1, **kwargs):
         self.settings = app.settings.new_settings
@@ -260,7 +260,7 @@ class SettingsPopup(PopUp):
         self.main_notification(msg, style)
         self.save_btn.config(state='disabled')
 
-class AddNewPopup(PopUp):
+class AddNewPopup(Popup):
      
     def setup_ui(self):
         entry_frame = tk.Frame(self.main_fram, style=POPUP.CONTENT_TFRAME)
@@ -307,7 +307,7 @@ class AddNewPopup(PopUp):
             self.after(5000, lambda: self.title_info.set(self.title()))
 
 
-class ShowRowPopUp(PopUp):
+class ShowRowPopup(Popup):
     
     def __init__(self, app:App, width, height, title = '', iconphoto='', size=None, position=None, minsize=None, maxsize=None, resizable=None, transient=None, overrideredirect=True, windowtype=None, topmost=False, toolwindow=False, alpha=1, **kwargs):
         self.data_id = None
@@ -368,7 +368,7 @@ class ShowRowPopUp(PopUp):
         cancle_btn.pack(side='left', padx=5)
 
 
-class EditRowPopUp(ShowRowPopUp):
+class EditRowPopup(ShowRowPopup):
     
     def setup_ui(self):
         super().setup_ui()
@@ -401,7 +401,7 @@ class EditRowPopUp(ShowRowPopUp):
             self.after(2000, lambda:self.title_info.set(self.title()))
 
 
-class ImportDataPopUp(PopUp):
+class ImportDataPopup(Popup):
     
     def __init__(self, app, width, height, title = '', iconphoto='', size=None, position=None, minsize=None, maxsize=None, resizable=None, transient=None, overrideredirect=True, windowtype=None, topmost=False, toolwindow=False, alpha=1, **kwargs):
         self.txt_file = None
@@ -547,7 +547,7 @@ class ImportDataPopUp(PopUp):
         self.n_success = 0
         
 
-class ExportDataPopUp(PopUp):
+class ExportDataPopup(Popup):
 
     def __init__(self, app, width, height, title = '', iconphoto='', size=None, position=None, minsize=None, maxsize=None, resizable=None, transient=None, overrideredirect=True, windowtype=None, topmost=False, toolwindow=False, alpha=1, **kwargs):
         self.delta = None

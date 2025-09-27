@@ -3,6 +3,7 @@ from FrontEnd.customwidget import *
 from FrontEnd.styles import POPUP,SUCCESS_TL, DANGER_TL, INFO_TL, WARNING_TL
 from BackEnd.core import App
 
+
 class Popup(tk.Toplevel):
 
     def __init__(self, app:App, width:int, height:int, title:str='', iconphoto='', size=None, position=None, minsize=None, maxsize=None, resizable=None, transient=None, overrideredirect=True, windowtype=None, topmost=False, toolwindow=False, alpha=1, **kwargs):
@@ -75,6 +76,7 @@ class Popup(tk.Toplevel):
         else:
             self.destroy()
 
+
 class SettingsPopup(Popup):
     
     def __init__(self, app, width, height, title = '', iconphoto='', size=None, position=None, minsize=None, maxsize=None, resizable=None, transient=None, overrideredirect=True, windowtype=None, topmost=False, toolwindow=False, alpha=1, **kwargs):
@@ -133,7 +135,6 @@ class SettingsPopup(Popup):
     
     def choose_db_path(self, entry_path:tk.Entry):
         dir = self.open_dialog(filedialog.askdirectory)
-        # dir = filedialog.askdirectory()
         if dir:
             entry_path.delete(0, 'end')
             entry_path.insert(0, dir)
@@ -259,6 +260,7 @@ class SettingsPopup(Popup):
             style = DANGER_TL
         self.main_notification(msg, style)
         self.save_btn.config(state='disabled')
+
 
 class AddNewPopup(Popup):
      
@@ -437,7 +439,6 @@ class ImportDataPopup(Popup):
         
         txt_info_label = tk.Label(text_frame, text=txt_info, font=("Arial", 10), style=POPUP.SIDEBAR_TLABEL)
         txt_info_label.pack(fill='x',pady=(15,3))
-        # tk.Button(text_frame, text="Choose txt file", command=lambda:self.choose_file([("TEXT file","*.txt")])).pack(fill='x')
         self.line_sep = Entry(text_frame, "Enter Line separator", style=POPUP.CUSTOM_TENTRY)
         self.line_sep.pack(fill='x', pady=(10,3))
         self.txt_btn = tk.Button(text_frame, text="📜 TXT", command=self.read_txt, style=POPUP.CUSTOM_TBUTTON)
@@ -460,9 +461,6 @@ class ImportDataPopup(Popup):
     
     def choose_file(self, file_type:list):
         file_path = self.open_dialog(filedialog.askopenfilename, filetypes=file_type)
-        # file_path = filedialog.askopenfilename(
-        #     filetypes=file_type
-        # )
         if file_path:
             if file_type[0][1] == "*.txt":
                 self.txt_file = file_path
@@ -600,8 +598,6 @@ class ExportDataPopup(Popup):
             value=False, style=POPUP.CONTENT_TRADIOBTN
         )
         no_encrypt.pack(anchor='w', fill='x', pady=5)
-
-        # eframe
         e = Entry(exleft_frame, "Enter file name")
         e.pack(padx=2, fill=tk.X)
         self.csv_btn = tk.Button(exleft_frame, text="Export to CSV", command=lambda:self.export_to_csv(e.result()))
@@ -633,9 +629,6 @@ class ExportDataPopup(Popup):
     
     def choose_dir(self):
         self.directory = self.open_dialog(filedialog.askdirectory,mustexist=True, title="Select Directory")
-        # self.directory = filedialog.askdirectory(
-        #     mustexist=True, title="Select Directory"
-        # )
 
     def disable(self):
         self.csv_btn.config(state=tk.DISABLED)
@@ -698,17 +691,15 @@ class ExportDataPopup(Popup):
         except StopIteration as e:
             if n_c>0:
                 self.percentage.set(f"{self.length} lines| 100% completed | {n_c} characters write successfully.")
+                self.main_notification(f"Data save to {self.directory}", SUCCESS_TL, 10000)
             else:
                 self.percentage.set("No Data To Write.")
             self.value = None
-            # self.active()
         except TypeError as e:
             print(e)
             self.percentage.set(f"typeError: {e}")
-            # self.active()
         except Exception as e:
             self.percentage.set(f"Error: {e}")
-            # self.active()
         self.active()
         self.progress['value'] = 100
 

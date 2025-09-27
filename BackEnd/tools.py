@@ -1,7 +1,6 @@
 import time
 import os
 import json
-import subprocess
 import pyperclip as ppc
 
 

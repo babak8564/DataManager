@@ -57,6 +57,13 @@ class PopUp(tk.Toplevel):
         self.after(delay, self.title_info.set, old_title)
         self.after(delay, lambda:self.info_label.config(style=old_style))
     
+    def open_dialog(self, dialog, *args, **kwrgs):
+        self.grab_release()
+        result = dialog(*args, **kwrgs)
+        self.grab_set()
+        self.focus()
+        return result
+    
     def on_close(self, ev=None):
         if ev:
             y_max, x_max = ev.widget.winfo_reqheight(), ev.widget.winfo_reqwidth()
@@ -122,7 +129,8 @@ class SettingsPopup(PopUp):
         self.save_btn.config(state='normal')
     
     def choose_db_path(self, entry_path:tk.Entry):
-        dir = filedialog.askdirectory()
+        dir = self.open_dialog(filedialog.askdirectory)
+        # dir = filedialog.askdirectory()
         if dir:
             entry_path.delete(0, 'end')
             entry_path.insert(0, dir)
@@ -448,9 +456,10 @@ class ImportDataPopUp(PopUp):
         self.txt_btn.config(state=tk.NORMAL)
     
     def choose_file(self, file_type:list):
-        file_path = filedialog.askopenfilename(
-            filetypes=file_type
-        )
+        file_path = self.open_dialog(filedialog.askopenfilename, filetypes=file_type)
+        # file_path = filedialog.askopenfilename(
+        #     filetypes=file_type
+        # )
         if file_path:
             if file_type[0][1] == "*.txt":
                 self.txt_file = file_path
@@ -620,9 +629,10 @@ class ExportDataPopUp(PopUp):
         return len(self.item_selected)
     
     def choose_dir(self):
-        self.directory = filedialog.askdirectory(
-            mustexist=True, title="Select Directory"
-        )
+        self.directory = self.open_dialog(filedialog.askdirectory,mustexist=True, title="Select Directory")
+        # self.directory = filedialog.askdirectory(
+        #     mustexist=True, title="Select Directory"
+        # )
 
     def disable(self):
         self.csv_btn.config(state=tk.DISABLED)

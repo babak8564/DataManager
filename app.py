@@ -23,7 +23,6 @@ root.protocol("WM_DELETE_WINDOW", app.on_closing)
 app_icon = tk.PhotoImage(file=app.settings.new_settings['icons']['app_icon'])
 root.iconphoto(False, app_icon)
 
-
 app.style = CryptoStyle(root, app.style_variant, app.style_type, app.style_color)
 
 app.main_notif = tk.Label(root, text='', justify='center', anchor='center', style=MAIN.CONTENT_TLABEL)

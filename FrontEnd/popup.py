@@ -60,7 +60,7 @@ class Popup(tk.Toplevel):
     
     def open_dialog(self, dialog, *args, **kwrgs):
         self.grab_release()
-        self.withdraw
+        self.withdraw()
         result = dialog(*args, **kwrgs)
         self.deiconify()
         self.lift()

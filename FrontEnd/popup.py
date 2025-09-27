@@ -616,7 +616,7 @@ class ExportDataPopup(Popup):
         plabel = tk.Label(self.main_fram, textvariable=self.percentage, style=POPUP.CONTENT_TLABEL)
         plabel.pack(fill='x',padx=5)
         self.progress = tk.Progressbar(self.main_fram, length=100, bootstyle=tk.INFO)
-        self.progress.pack(fill='x', pady=(0,5), padx=5)
+        self.progress.pack(fill='x', pady=(0,5), padx=5, anchor='s')
         self.progress['value'] = 100
     
     @property
